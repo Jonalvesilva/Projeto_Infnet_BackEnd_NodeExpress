@@ -16,7 +16,7 @@ export function TableFuncionarios({ head, rows }: field) {
           return (
             <tr
               key={index}
-              className="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"
+              className="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-6 sm:mb-0"
             >
               {head.map((dados, index) => {
                 return (
@@ -34,7 +34,7 @@ export function TableFuncionarios({ head, rows }: field) {
           return (
             <tr
               key={index}
-              className="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
+              className="flex flex-col flex-no wrap sm:table-row mb-6 sm:mb-0"
             >
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
                 {element.id}
@@ -52,7 +52,7 @@ export function TableFuncionarios({ head, rows }: field) {
                 {element.salary}
               </td>
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
-                {element.createDate}
+                {element.created_at}
               </td>
               <td className="border-grey-light border p-2 h-11">
                 <div className="flex gap-6 justify-center items-center">
