@@ -1,0 +1,6 @@
+PATCH http://localhost:8080/fornecedores/1 
+Content-Type: application/json
+
+{
+"name": "Americanas LTDA"
+}

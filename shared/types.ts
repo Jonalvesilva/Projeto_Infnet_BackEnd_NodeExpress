@@ -4,7 +4,7 @@ export type Funcionario = {
   surname: string;
   title: string;
   salary: string;
-  createDate: string;
+  created_at: string;
 };
 
 export type Fornecedor = {
@@ -12,5 +12,5 @@ export type Fornecedor = {
   name: string;
   status: string;
   person: string;
-  createDate: string;
+  created_at: string;
 };

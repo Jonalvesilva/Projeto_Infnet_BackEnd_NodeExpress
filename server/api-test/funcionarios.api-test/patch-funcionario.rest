@@ -1,0 +1,6 @@
+PATCH http://localhost:8080/funcionarios/1 
+Content-Type: application/json
+
+{
+"name": "Jonathan"
+}

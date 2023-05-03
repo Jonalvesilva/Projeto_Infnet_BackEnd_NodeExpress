@@ -1,0 +1,10 @@
+PUT http://localhost:8080/fornecedores/1 
+Content-Type: application/json
+
+{
+  "name": "Amoedo Construções",
+  "status": "Inativa",
+  "person": "Juridica",
+  "created_at": "2023-04-17T10:48:18.584Z"
+}
+

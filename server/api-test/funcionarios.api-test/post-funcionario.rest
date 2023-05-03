@@ -1,0 +1,10 @@
+POST http://localhost:8080/funcionarios/
+Content-Type: application/json
+
+{
+  "name": "Ezequiel",
+  "surname": "Silveira",
+  "title": "Analista Pleno",
+  "salary": "6000",
+  "created_at": "2023-04-17T10:48:18.584Z"
+}

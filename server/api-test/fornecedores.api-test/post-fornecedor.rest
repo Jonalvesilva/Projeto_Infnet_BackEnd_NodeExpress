@@ -1,0 +1,9 @@
+POST http://localhost:8080/fornecedores/
+Content-Type: application/json
+
+{
+  "name": "C&C LTDA",
+  "status": "Ativa",
+  "person": "Juridica"
+}
+
