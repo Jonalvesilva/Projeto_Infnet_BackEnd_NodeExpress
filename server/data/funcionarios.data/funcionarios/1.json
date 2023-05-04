@@ -1,1 +1,8 @@
-{"id":1,"name":"Jonathan","surname":"Alves","title":"Desenvolvedor Junior","salary":"5000","created_at":"1/1/2001"}
+{
+  "id": 1,
+  "name": "Jonathan",
+  "surname": "Alves",
+  "title": "Desenvolvedor Junior",
+  "salary": "5000",
+  "created_at": "2023-04-17T10:48:18.584Z"
+}

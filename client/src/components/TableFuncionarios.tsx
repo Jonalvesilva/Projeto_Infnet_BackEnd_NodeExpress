@@ -1,7 +1,5 @@
 import type { Funcionario } from "../../../shared/types";
-import { FaUserEdit } from "react-icons/fa";
-import { TiDelete } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { LinkButton } from "./LinkButton";
 
 export type field = {
   head: String[];
@@ -52,21 +50,16 @@ export function TableFuncionarios({ head, rows }: field) {
                 {element.salary}
               </td>
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
-                {element.created_at}
+                {new Date(element.created_at).toLocaleDateString()}
               </td>
-              <td className="border-grey-light border p-2 h-11">
-                <div className="flex gap-6 justify-center items-center">
-                  <Link to="/">
-                    <div className="flex justify-center items-center gap-2 hover:bg-gray-200">
-                      <FaUserEdit size={25}>Editar</FaUserEdit>Editar
-                    </div>
-                  </Link>
-                  <Link to="/fornecedores">
-                    <div className="flex justify-center items-center gap-1 hover:bg-gray-200">
-                      <TiDelete size={25}>Editar</TiDelete>Deletar
-                    </div>
-                  </Link>
-                </div>
+              <td className="border-grey-light border p-2 h-11 flex justify-center items-center">
+                <LinkButton
+                  to={`/funcionarios/${element.id}`}
+                  key={element.id}
+                  className="bg-blue-400 p-1 text-white rounded-lg"
+                >
+                  Mostrar Funcionário
+                </LinkButton>
               </td>
             </tr>
           );

@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import { TableFuncionarios } from "../components/TableFuncionarios";
 import { LinkButton } from "../components/LinkButton";
-import { Funcionario, Fornecedor } from "../../../shared/types";
+import { Funcionario } from "../../../shared/types";
 import "../App.css";
 import { Breadcrumbs } from "../components/Breadcumbs";
 import { SearchBar } from "../components/SearchBar";
 import { config } from "../config";
 import { createUrlParams } from "../createUrlParams";
+import { getFuncionarios } from "../api/getFuncionarios";
+import { asyncDebounce } from "../asyncDebounce";
+import { PaginationButtons } from "../components/PaginationButtons";
 
 const pageSize = config.pageSize;
+const debouncedGetNotepads = asyncDebounce(getFuncionarios, 1000);
 
 const initialFuncionarioList = {
   count: 0,
@@ -24,26 +28,6 @@ const headers = [
   "Salario",
   "Data Criação",
   "Opções",
-];
-
-const teste = [
-  {
-    id: 1,
-    name: "Jonathan",
-    surname: "Alves",
-    title: "Desenvolvedor Junior",
-    salary: "R$ 3000",
-    created_at: "1/1/2001",
-  },
-
-  {
-    id: 2,
-    name: "Wesley",
-    surname: "Alves",
-    title: "Desenvolvedor Senior",
-    created_at: "20/3/2012",
-    salary: "R$ 9000",
-  },
 ];
 
 export function FuncionariosView() {
@@ -65,6 +49,21 @@ export function FuncionariosView() {
     order_by: orderBy,
   };
 
+  const [page, setPage] = useState(1);
+  const limit = pageSize;
+  const offset = pageSize * (page - 1);
+
+  useEffect(() => {
+    debouncedGetNotepads(getFuncionarioParams).then(setFuncionarioList);
+    setPage(1);
+  }, [direction, orderBy, search]);
+
+  useEffect(() => {
+    debouncedGetNotepads({ ...getFuncionarioParams, offset }).then(
+      setFuncionarioList
+    );
+  }, [page]);
+
   return (
     <div>
       <Breadcrumbs
@@ -84,7 +83,10 @@ export function FuncionariosView() {
             </LinkButton>
           </div>
         </div>
-        <SearchBar search="teste" onChange={() => console.log("teste")} />
+        <SearchBar
+          search={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
         <div className="w-full flex gap-10">
           <select
             value={orderBy}
@@ -92,8 +94,8 @@ export function FuncionariosView() {
             onChange={(event) => setOrderBy(event.target.value)}
           >
             <option value="id">ID</option>
-            <option value="title">Título</option>
-            <option value="created_at">Data de criação</option>
+            <option value="title">Cargo</option>
+            <option value="created_at">Data Criação</option>
           </select>
           <select
             value={direction}
@@ -104,7 +106,17 @@ export function FuncionariosView() {
             <option value="desc">Desc</option>
           </select>
         </div>
-        <TableFuncionarios head={headers} rows={teste} />
+        <TableFuncionarios head={headers} rows={funcionarioList.funcionarios} />
+        <div>
+          <PaginationButtons
+            currentPage={page}
+            pageCount={pageCount}
+            onClick={(event) => {
+              let target = event.target as HTMLInputElement;
+              setPage(Number(target.value));
+            }}
+          ></PaginationButtons>
+        </div>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ type GetFuncionariosOutput = {
   funcionarios: Funcionario[];
 };
 
-export async function getFuncionario(
+export async function getFuncionarios(
   params: GetFuncionarioInput = {}
 ): Promise<GetFuncionariosOutput> {
   const res = await api.get("/funcionarios", {
