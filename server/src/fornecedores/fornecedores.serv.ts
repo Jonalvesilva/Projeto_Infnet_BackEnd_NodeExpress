@@ -65,9 +65,9 @@ export function findFornecedores({
         const createdAtFornecedorA = Date.parse(fornecedorA.created_at);
         const createdAtFornecedorB = Date.parse(fornecedorB.created_at);
         return createdAtFornecedorA - createdAtFornecedorB;
-      } else if (order_by === "person") {
-        const titleFornecedorA = fornecedorA.person;
-        const titleFornecedorB = fornecedorB.person;
+      } else if (order_by === "name") {
+        const titleFornecedorA = fornecedorA.name;
+        const titleFornecedorB = fornecedorB.name;
         if (titleFornecedorA < titleFornecedorB) {
           return -1;
         } else if (titleFornecedorB > titleFornecedorA) {

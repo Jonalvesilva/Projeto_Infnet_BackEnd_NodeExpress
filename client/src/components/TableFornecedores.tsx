@@ -1,12 +1,12 @@
-import type { Funcionario } from "../../../shared/types";
+import type { Fornecedor } from "../../../shared/types";
 import { LinkButton } from "./LinkButton";
 
 export type field = {
   head: String[];
-  rows: Funcionario[];
+  rows: Fornecedor[];
 };
 
-export function TableFuncionarios({ head, rows }: field) {
+export function TableFornecedores({ head, rows }: field) {
   return (
     <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
       <thead className="text-white">
@@ -41,24 +41,21 @@ export function TableFuncionarios({ head, rows }: field) {
                 {element.name}
               </td>
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
-                {element.surname}
+                {element.status}
               </td>
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
-                {element.title}
-              </td>
-              <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
-                {element.salary}
+                {element.person}
               </td>
               <td className="border-grey-light border hover:bg-gray-100 p-2 h-11 sm:text-center">
                 {new Date(element.created_at).toLocaleDateString("en-GB")}
               </td>
               <td className="border-grey-light border p-2 h-11 flex justify-center items-center">
                 <LinkButton
-                  to={`/funcionarios/${element.id}`}
+                  to={`/fornecedores/${element.id}`}
                   key={element.id}
                   className="bg-blue-400 p-1 text-white rounded-lg"
                 >
-                  Mostrar Funcionário
+                  Mostrar Fornecedor
                 </LinkButton>
               </td>
             </tr>

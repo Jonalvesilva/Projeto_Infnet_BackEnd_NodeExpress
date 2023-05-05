@@ -14,7 +14,7 @@ type GetFornecedoresOutput = {
   fornecedores: Fornecedor[];
 };
 
-export async function getFornecedor(
+export async function getFornecedores(
   params: GetFornecedorInput = {}
 ): Promise<GetFornecedoresOutput> {
   const res = await api.get("/fornecedores", {

@@ -19,6 +19,7 @@ export function TextField({
       onChange={(event) => onChange(event.target.value)}
       className={className}
       type="text"
+      required
     />
   );
 }

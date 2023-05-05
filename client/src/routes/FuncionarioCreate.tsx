@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import toast from "react-simple-toasts";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "../components/TextField";
-import { getFuncionario } from "../api/getFuncionario";
-import { putFuncionario } from "../api/putFuncionario";
+import { postFuncionario } from "../api/postFuncionario";
 import { Breadcrumbs } from "../components/Breadcumbs";
 import { TextNumber } from "../components/TextNumber";
 
-function getBreadcrumbs(title: string, id: number) {
+function getBreadcrumbs() {
   return [
     { title: "Página inicial", link: "/" },
     { title: "Gerenciamento de Funcionários", link: `/funcionarios/` },
-    { title, link: `/funcionarios/${id}` },
   ];
 }
 
@@ -23,41 +21,26 @@ const initialCreateFuncionario = {
   created_at: "",
 };
 
-export function FuncionarioEdit() {
-  const params = useParams();
+export function FuncionarioCreate() {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialCreateFuncionario);
 
-  useEffect(() => {
-    getFuncionario(Number(params.id)).then((results) =>
-      setForm({
-        name: results.name,
-        surname: results.surname,
-        title: results.title,
-        salary: results.salary,
-        created_at: results.created_at,
-      })
-    );
-  }, []);
-
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const response = await putFuncionario(Number(params.id), form);
+    const response = await postFuncionario(form);
     if (response.success) {
-      toast("O funcionário foi editado com sucesso");
-      navigate(`/funcionarios/${params.id}`);
+      toast("Funcionário Cadastrado Com Sucesso");
+      navigate("/funcionarios");
     } else {
-      toast("Não foi possível editar o funcionário");
+      toast("Falha no Cadastro do Funcionário. Tente Novamente.");
     }
   }
 
   return (
     <div>
-      <Breadcrumbs
-        links={getBreadcrumbs(`Funcionário ID:${params.id}`, Number(params.id))}
-      />
+      <Breadcrumbs links={getBreadcrumbs()} />
       <h1 className="text-center font-bold italic text-white font-serif my-10 text-2xl md:text-3xl ">
-        Editar Funcionário
+        Adicionar Funcionário
       </h1>
       <form
         className="flex flex-col gap-2 mx-2 md:mx-auto md:max-w-screen-md"
@@ -94,7 +77,7 @@ export function FuncionarioEdit() {
           type="submit"
           className="bg-cyan-600 hover:bg-cyan-400 text-white h-12 mb-4 py-2 px-3 rounded-xl uppercase font-bold btn-text-shadow text-sm"
         >
-          Editar
+          Adicionar
         </button>
       </form>
     </div>

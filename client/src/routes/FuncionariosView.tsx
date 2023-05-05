@@ -76,7 +76,7 @@ export function FuncionariosView() {
           </div>
           <div className="flex">
             <LinkButton
-              to="/addFuncionario"
+              to="/funcionarios/addFuncionario"
               className="p-2 bg-green-700 text-white rounded-xl hover:bg-green-500"
             >
               Adicionar Funcionário
